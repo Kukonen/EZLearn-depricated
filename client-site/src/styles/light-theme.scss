@@ -1,0 +1,51 @@
+:root {
+  color: $light-font-color;
+  background-color: $light-background-color;
+
+  a {
+    color: $light-font-color;
+
+    &:hover {
+      color: $light-font-color-hover;
+    }
+  }
+
+  button {
+    color: $light-font-color;
+
+    background-color: $light-button-background-color;
+
+    border: 1px solid $light-border-color;
+
+    &:hover {
+      background-color: $light-button-background-color-hover;
+    }
+  }
+
+  input {
+    background-color: $light-background-color;
+
+    color: $light-font-color;
+
+    border: 1px solid $light-border-color;
+  }
+
+  // schedule
+
+  // lesson-type
+  .schedule__day__lesson__type_lecture {
+    color: $light-lesson-type-lecture;
+  }
+
+  .schedule__day__lesson__type_seminar {
+    color: $light-lesson-type-seminar;
+  }
+
+  .schedule__day__lesson__type_laboratory-work {
+    color: $light-lesson-type-laboratory-work;
+  }
+
+  .schedule__day__lesson__type_course-work {
+    color: $light-lesson-type-course-work;
+  }
+}

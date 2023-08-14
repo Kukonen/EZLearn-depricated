@@ -1,0 +1,86 @@
+@import "variables";
+
+.schedule {
+  display: flex;
+
+  justify-content: center;
+  flex-wrap: wrap;
+
+  padding: 30px;
+
+  gap: 30px;
+}
+
+.schedule__header {
+  padding: 15px;
+}
+
+.schedule__day {
+
+  border: 1px solid $light-border-color;
+  border-radius: 5px;
+
+  padding: 15px;
+
+  width: 300px;
+
+  text-align: center;
+}
+
+.schedule__day__lessons {
+  display: flex;
+
+  gap: 10px;
+
+  flex-direction: column;
+}
+
+.schedule__day__lesson {
+  display: flex;
+
+  flex-direction: column;
+
+  border-top: 1px solid $light-border-color;
+  border-bottom: 1px solid $light-border-color;
+  border-radius: 5px;
+
+  gap: 10px;
+
+  padding: 10px;
+}
+
+.schedule__day__lesson__name {
+  text-align: justify;
+}
+
+.schedule__day__lesson__type {
+  font-size: 16px;
+
+  text-align: start;
+}
+
+.schedule__day__lesson__professors {
+  display: flex;
+
+  justify-content: right;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+
+  a {
+    border: 1px solid $light-border-color;
+
+    border-radius: 5px;
+
+    padding: 5px 10px;
+  }
+
+  font-size: 14px;
+}
+
+.schedule__day__lesson__time {
+  font-size: 14px;
+
+  text-align: end;
+}

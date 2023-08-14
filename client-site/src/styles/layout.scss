@@ -1,0 +1,55 @@
+@import "variables";
+
+//header
+
+header {
+  height: 75px;
+  width: 100%;
+
+  display: flex;
+}
+
+.header__logo {
+  width: 100px;
+}
+
+.header__logo__image {
+  width: 100%;
+  height: 100%;
+}
+
+.header__links {
+  flex:auto;
+
+  padding: 15px;
+  gap: 20px;
+
+  display: flex;
+
+  &:nth-child(n){
+    margin: auto;
+  }
+}
+
+.header__theme {
+  width: 180px;
+  padding: 15px 10px;
+}
+
+.header__theme__button {
+  //margin: auto;
+}
+
+// main
+
+main {
+  flex-grow: 1;
+}
+
+// footer
+
+footer {
+  flex-shrink: 0;
+
+  padding: 15px;
+}

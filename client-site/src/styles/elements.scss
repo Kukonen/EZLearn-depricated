@@ -1,0 +1,45 @@
+@import "variables";
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    transition: 200ms;
+  }
+}
+
+button {
+  font-size: $font-size;
+
+  padding: 10px;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  //white-space:nowrap;
+  //overflow: visible;
+
+  &:hover {
+    transition: 200ms;
+  }
+
+  img {
+    vertical-align:middle;
+
+    width: $font-size;
+    height: $font-size;
+  }
+}
+
+input {
+  font-size: $font-size;
+
+  padding: 10px;
+
+  outline: none;
+}
+
+ul {
+  line-height: 40px;
+}

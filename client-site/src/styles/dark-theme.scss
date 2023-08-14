@@ -1,0 +1,51 @@
+.dark {
+  color: $dark-font-color;
+  background-color: $dark-background-color;
+
+  a {
+    color: $dark-font-color;
+
+    &:hover {
+      color: $dark-font-color-hover;
+    }
+  }
+
+  button {
+    color: $dark-font-color;
+
+    background-color: $dark-button-background-color;
+
+    border: 1px solid $dark-border-color;
+
+    &:hover {
+      background-color: $dark-button-background-color-hover;
+    }
+  }
+
+  input {
+    background-color: $dark-background-color;
+
+    color: $dark-font-color;
+
+    border: 1px solid $dark-border-color;
+  }
+
+  // schedule
+
+  // lesson-type
+  .schedule__day__lesson__type_lecture {
+    color: $dark-lesson-type-lecture;
+  }
+
+  .schedule__day__lesson__type_seminar {
+    color: $dark-lesson-type-seminar;
+  }
+
+  .schedule__day__lesson__type_laboratory-work {
+    color: $dark-lesson-type-laboratory-work;
+  }
+
+  .schedule__day__lesson__type_course-work {
+    color: $dark-lesson-type-course-work;
+  }
+}
