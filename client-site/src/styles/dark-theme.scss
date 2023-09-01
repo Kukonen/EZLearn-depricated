@@ -10,18 +10,6 @@
     }
   }
 
-  button {
-    color: $dark-font-color;
-
-    background-color: $dark-button-background-color;
-
-    border: 1px solid $dark-border-color;
-
-    &:hover {
-      background-color: $dark-button-background-color-hover;
-    }
-  }
-
   input {
     background-color: $dark-background-color;
 

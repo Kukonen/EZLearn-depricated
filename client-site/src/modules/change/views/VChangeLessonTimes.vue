@@ -6,6 +6,7 @@ import {LessonTime} from "../../../types/common.types.ts";
 import CHeading from "../../../components/CHeading.vue";
 import CChangeLessonTime from "../components/CChangeLessonTime.vue";
 import CChangeAdd from "../components/CChangeAdd.vue";
+import CButton from "../../../components/CButton.vue";
 
 const store = useStore();
 const lessonTimes = ref<LessonTime[]>();
@@ -67,9 +68,9 @@ const save = () => {
     />
 
     <c-change-add :add="add" />
-    <button @click="save">
+    <c-button type="common" @click="save">
         Сохранить
-    </button>
+    </c-button>
 
 </template>
 

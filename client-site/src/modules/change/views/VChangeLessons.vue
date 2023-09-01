@@ -7,6 +7,7 @@ import {generateRandomString} from "../../../helpers/helpFunctions.helper.ts";
 import CHeading from "../../../components/CHeading.vue";
 import CChangeAdd from "../components/CChangeAdd.vue";
 import CChangeLesson from "../components/CChangeLesson.vue";
+import CButton from "../../../components/CButton.vue";
 
 const store = useStore();
 const lessons = ref<Lesson[]>()
@@ -58,9 +59,9 @@ const save = () => {
     />
 
     <c-change-add :add="add" />
-    <button @click="save">
+    <c-button type="common" @click="save">
         Сохранить
-    </button>
+    </c-button>
 </template>
 
 <style scoped>

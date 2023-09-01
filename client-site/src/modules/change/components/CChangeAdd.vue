@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AddImage from '../../../assets/add.svg';
+import CButton from "../../../components/CButton.vue";
 
 const {add} = defineProps<{
     add: () => void
@@ -7,10 +8,10 @@ const {add} = defineProps<{
 </script>
 
 <template>
-    <button @click="add">
+    <c-button type="common" @click="add">
         Добавить
         <img :src="AddImage" alt="добавить">
-    </button>
+    </c-button>
 </template>
 
 <style scoped>

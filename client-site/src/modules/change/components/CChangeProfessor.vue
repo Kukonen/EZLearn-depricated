@@ -2,6 +2,7 @@
 import {Professor} from "../../../types/common.types.ts";
 import {toRefs} from "vue";
 import TrashImage from '../../../assets/trash.svg';
+import CButton from "../../../components/CButton.vue";
 
 const props = defineProps<{
     professor: Professor,
@@ -25,12 +26,13 @@ const remove = () => {
             :value="professor.name"
             @input="event => professor.name = event.target.value"
         >
-        <button
+        <c-button
+            type="common"
             @click="remove"
         >
             Вычеркнуть
             <img :src="TrashImage" alt="вычеркнуть">
-        </button>
+        </c-button>
     </div>
 </template>
 

@@ -3,6 +3,7 @@
 import {Lesson} from "../../../types/common.types.ts";
 import {toRefs} from "vue";
 import TrashImage from "../../../assets/trash.svg";
+import CButton from "../../../components/CButton.vue";
 
 const props = defineProps<{
     lesson: Lesson,
@@ -26,12 +27,13 @@ const remove = () => {
             :value="lesson.title"
             @input="event => lesson.title = event.target.value"
         >
-        <button
+        <c-button
+            type="common"
             @click="remove"
         >
             Вычеркнуть
             <img :src="TrashImage" alt="вычеркнуть">
-        </button>
+        </c-button>
     </div>
 </template>
 

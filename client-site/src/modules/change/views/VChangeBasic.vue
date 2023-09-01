@@ -6,6 +6,7 @@ import {computed, onMounted, ref, watch} from "vue";
 import {SelectItem} from "../../../types/elemets.ts";
 import {getUniversity, getGroup, getTemplate, selectSchedule} from "../../../helpers/scheduleSettings/basic.helper.ts";
 import {useStore} from 'vuex';
+import CButton from "../../../components/CButton.vue";
 
 const store = useStore();
 
@@ -92,12 +93,13 @@ const selectBasicSchedule = () => {
             :select="selectTemplate"
         />
     </div>
-    <button
+    <c-button
+        type="common"
         v-if="isShowButton"
         @click="selectBasicSchedule"
     >
         Выбрать Расписание
-    </button>
+    </c-button>
 </template>
 
 <style scoped>

@@ -2,6 +2,7 @@
 
 import TrashImage from "../../../assets/trash.svg";
 import {Professor} from "../../../types/common.types.ts";
+import CButton from "../../../components/CButton.vue";
 
 const props = defineProps<{
     professor: Professor,
@@ -21,12 +22,13 @@ const remove = () => {
         <div>
             {{professor.name}}
         </div>
-        <button
+        <c-button
+            type="common"
             @click="remove"
         >
             Вычеркнуть
             <img :src="TrashImage" alt="вычеркнуть">
-        </button>
+        </c-button>
     </div>
 
 </template>

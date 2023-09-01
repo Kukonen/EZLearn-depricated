@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import CLink from "../components/CLink.vue";
 import LogoImage from "../assets/logo.svg";
+import CThemeButton from "./CThemeButton.vue";
 
-const switchTheme = () => {
-    document.documentElement.classList.toggle('dark')
-}
 </script>
 
 <template>
@@ -20,9 +18,7 @@ const switchTheme = () => {
             <c-link path='/change'>Редактировать рассписание</c-link>
         </nav>
         <div class="header__theme">
-            <button @click="switchTheme" class="header__theme__button">
-                Поменять тему
-            </button>
+            <c-theme-button />
         </div>
     </header>
 

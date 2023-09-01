@@ -7,6 +7,7 @@ import {getGroup, getUniversity} from "../../../../helpers/scheduleSettings/basi
 import CSelect from "../../../../components/CSelect.vue";
 import {useStore} from "vuex";
 import {ScheduleInformation} from "../../../../types/schedule.types.ts";
+import CButton from "../../../../components/CButton.vue";
 
 const store = useStore();
 
@@ -69,9 +70,9 @@ const selectGroup = (key: string, text: string) => {
             @input="event => template = event.target.value"
         />
 
-        <button>
+        <c-button type="common">
             Сохранить
-        </button>
+        </c-button>
     </div>
 
 </template>

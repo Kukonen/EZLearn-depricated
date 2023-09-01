@@ -2,6 +2,7 @@
 
 import CHeading from "../../../../components/CHeading.vue";
 import {useStore} from "vuex";
+import CButton from "../../../../components/CButton.vue";
 
 const store = useStore();
 
@@ -20,16 +21,18 @@ const createEmpty = () => {
         Создание нового шаблона
     </c-heading>
     <div>
-        <button
+        <c-button
+            type="common"
             @click="createFromCurrent"
         >
             Загрузить Текущий
-        </button>
-        <button
+        </c-button>
+        <c-button
+            type="common"
             @click="createEmpty"
         >
             Создать Новый
-        </button>
+        </c-button>
     </div>
 </template>
 

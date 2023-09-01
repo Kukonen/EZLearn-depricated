@@ -2,6 +2,7 @@
 
 import CHeading from "../../../../components/CHeading.vue";
 import {useStore} from "vuex";
+import CButton from "../../../../components/CButton.vue";
 
 const store = useStore();
 
@@ -20,12 +21,12 @@ const shareWithCommunity = () => {
         Загрузка Шаблона
     </c-heading>
     <div>
-        <button @click="saveInCurrent">
+        <c-button type="common" @click="saveInCurrent">
             Сделать Шаблон Текущим Рассписанием
-        </button>
-        <button @click="shareWithCommunity">
+        </c-button>
+        <c-button type="common" @click="shareWithCommunity">
             Поделиться с Сообществом
-        </button>
+        </c-button>
     </div>
 </template>
 

@@ -8,6 +8,7 @@ import {translateDayTitle} from "../../../helpers/schedule/schedule.helper.ts";
 import {SelectItem} from "../../../types/elemets.ts";
 import {useStore} from "vuex";
 import CChangeDay from "../components/CChangeDay.vue";
+import CButton from "../../../components/CButton.vue";
 
 const store = useStore();
 
@@ -58,9 +59,9 @@ const save = () => {
 
     <c-change-day />
 
-    <button @click="save">
+    <c-button type="common" @click="save">
         Сохранить
-    </button>
+    </c-button>
 </template>
 
 <style scoped>

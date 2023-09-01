@@ -7,6 +7,7 @@ import CChangeProfessor from "../components/CChangeProfessor.vue";
 import {Professor} from "../../../types/common.types.ts";
 import CChangeAdd from "../components/CChangeAdd.vue";
 import {generateRandomString} from "../../../helpers/helpFunctions.helper.ts";
+import CButton from "../../../components/CButton.vue";
 
 const store = useStore();
 const professors = ref<Professor[]>();
@@ -60,9 +61,9 @@ const save = () => {
     />
 
     <c-change-add :add="add" />
-    <button @click="save">
+    <c-button type="common" @click="save">
         Сохранить
-    </button>
+    </c-button>
 </template>
 
 <style scoped>

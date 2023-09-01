@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {ref, toRefs} from "vue";
+import {computed, ref, toRefs} from "vue";
 import {SelectItem} from "../types/elemets.ts";
 
 const props = defineProps<{
@@ -16,8 +16,32 @@ const {id, placeholder, selectedItems} = toRefs(props);
 const open = ref(false);
 const selected = ref(placeholder ? placeholder : 'Выберете один из вариантов');
 
+const selectInput = ref<string>();
+const filteredSelectedItems = computed(() => {
+    if (!selectInput.value) {
+        return selectedItems.value;
+    }
+
+    return selectedItems.value.filter(
+        item =>
+            item.text.toUpperCase().indexOf(selectInput.value?.toUpperCase()) !== -1
+    )
+})
+
 const selectItem = (key: string, text: string) => {
     select(key, text);
+}
+
+const clickOnHeading = () => {
+    if (open.value === true) {
+        open.value = false;
+        return;
+    }
+
+    if (selectedItems.value.length > 0) {
+        open.value = true;
+        return;
+    }
 }
 
 const hide = () => open.value = false;
@@ -31,16 +55,21 @@ const hide = () => open.value = false;
             :class="{
                 select__current_active: open
             }"
-            @click="open = !open"
+            @click="clickOnHeading"
         >
             {{ selected }}
         </div>
         <div
-            class="select__container"
             v-if="open"
+            class="select__container"
         >
+            <input
+                type="text"
+                @input="event => selectInput = event.target.value"
+                class="select__input"
+            />
             <div
-                v-for="option of selectedItems"
+                v-for="option of filteredSelectedItems"
                 class="select__item"
                 :key="option.key"
                 @click="
@@ -92,6 +121,13 @@ const hide = () => open.value = false;
         z-index: 1;
     }
 
+    .select__input {
+        width: 100%;
+        outline: none;
+        border: 0;
+        border-bottom: 1px solid $light-border-color;
+    }
+
     .select__item {
         color: $light-font-color;
 
@@ -117,6 +153,10 @@ const hide = () => open.value = false;
         border: 1px solid $dark-border-color;
 
         background-color: $dark-background-color;
+    }
+
+    .select__input {
+        border-bottom: 1px solid $dark-border-color;
     }
 
     .select__item {
