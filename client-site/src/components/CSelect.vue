@@ -65,6 +65,7 @@ const hide = () => open.value = false;
         >
             <input
                 type="text"
+                :value="selectInput"
                 @input="event => selectInput = event.target.value"
                 class="select__input"
             />
