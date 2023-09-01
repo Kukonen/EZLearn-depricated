@@ -121,48 +121,62 @@ watch(professorAlreadySelected, () => {
             Занятие # {{lesson.lessonTime}}
         </c-heading>
 
-        <c-select
-            :id="`change_day_lesson_${lesson.id}_select`"
-            :select="selectLesson"
-            :placeholder="currentLesson"
-            :selected-items="lessonTitles"
-        />
+        <div class="change__days__lesson__section">
+            <c-select
+                :id="`change_day_lesson_${lesson.id}_select`"
+                :select="selectLesson"
+                :placeholder="currentLesson"
+                :selected-items="lessonTitles"
+            />
 
-        <c-select
-            :id="`change_day_type_${lesson.id}_select`"
-            :select="selectType"
-            :placeholder="currentType"
-            :selected-items="typesTitles"
-        />
+            <c-select
+                :id="`change_day_type_${lesson.id}_select`"
+                :select="selectType"
+                :placeholder="currentType"
+                :selected-items="typesTitles"
+            />
 
-        <c-select
-            :id="`change_day_professor_${lesson.id}_select`"
-            :select="selectProfessor"
-            :placeholder="currentProfessor.name"
-            :selected-items="professorsTitles"
-        />
+            <c-select
+                :id="`change_day_professor_${lesson.id}_select`"
+                :select="selectProfessor"
+                :placeholder="currentProfessor.name"
+                :selected-items="professorsTitles"
+            />
 
-        <c-change-lesson-professor
-            v-if="professors"
-            v-for="professor in professors"
-            :professor="professor"
-        />
+            <c-change-lesson-professor
+                v-if="professors"
+                v-for="professor in professors"
+                :professor="professor"
+            />
 
-        <c-change-add :add="addProfessor">
-            Добавить Префессора
-        </c-change-add>
+            <div>
+                <c-change-add
+                    :add="addProfessor"
+                />
+            </div>
 
-        <c-change-lesson-professor
-            v-for="alreadySelectedProfessor in professorAlreadySelected"
-            :key="alreadySelectedProfessor.id"
-            :professor="alreadySelectedProfessor"
-            :removeProfessor="removeAlreadySelectedProfessor"
-        />
+            <c-change-lesson-professor
+                v-for="alreadySelectedProfessor in professorAlreadySelected"
+                :key="alreadySelectedProfessor.id"
+                :professor="alreadySelectedProfessor"
+                :removeProfessor="removeAlreadySelectedProfessor"
+            />
+        </div>
+
+
+
+
+
     </div>
 
 
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/mixins/position.in.block";
+
+.change__days__lesson__section {
+    @include centralize-selects;
+}
 
 </style>

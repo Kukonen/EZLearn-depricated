@@ -61,19 +61,36 @@ const save = () => {
         Время Занятий
     </c-heading>
 
-    <c-change-lesson-time
-        v-for="lessonTime in lessonTimes"
-        :lesson-time="lessonTime"
-        :remove-lesson-time="remove"
-    />
+    <div class="change__lessons-times__list">
+        <c-change-lesson-time
+            v-for="lessonTime in lessonTimes"
+            :lesson-time="lessonTime"
+            :remove-lesson-time="remove"
+        />
+    </div>
 
-    <c-change-add :add="add" />
-    <c-button type="common" @click="save">
-        Сохранить
-    </c-button>
+    <div class="change__lessons-times__buttons">
+        <c-change-add :add="add" />
+        <c-button type="common" @click="save">
+            Сохранить
+        </c-button>
+    </div>
 
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/mixins/position.in.block";
 
+.change__lessons-times__list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+    padding: 15px 0;
+}
+
+.change__lessons-times__buttons {
+    @include centralize-buttons;
+}
 </style>

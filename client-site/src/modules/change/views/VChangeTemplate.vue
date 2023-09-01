@@ -23,6 +23,6 @@ import CChangeTemplateSettings from "../components/template/CChangeTemplateSetti
     <c-change-template-information />
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 </style>

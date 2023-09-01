@@ -20,7 +20,7 @@ const createEmpty = () => {
     <c-heading type="MEDIUM">
         Создание нового шаблона
     </c-heading>
-    <div>
+    <div class="change__template__container">
         <c-button
             type="common"
             @click="createFromCurrent"
@@ -36,6 +36,10 @@ const createEmpty = () => {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/mixins/position.in.block";
 
+.change__template__container {
+    @include centralize-buttons;
+}
 </style>

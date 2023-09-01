@@ -51,8 +51,7 @@ const selectGroup = (key: string, text: string) => {
     <c-heading type="MEDIUM">
         Основные настройки
     </c-heading>
-    <div>
-
+    <div class="change__template__settings__container">
         <c-select
             id="university_select"
             :placeholder="university.text"
@@ -66,17 +65,29 @@ const selectGroup = (key: string, text: string) => {
             :select="selectGroup"
         />
 
-        <input
-            @input="event => template = event.target.value"
-        />
+        <div class="change__template__settings__input__block">
+            <input
+                @input="event => template = event.target.value"
+            />
 
-        <c-button type="common">
-            Сохранить
-        </c-button>
+            <c-button type="common">
+                Сохранить
+            </c-button>
+        </div>
+
     </div>
 
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/mixins/position.in.block";
+@import "src/styles/mixins/input";
 
+.change__template__settings__container {
+    @include centralize-selects;
+}
+
+.change__template__settings__input__block {
+    @include input-with-button-block;
+}
 </style>

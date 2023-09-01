@@ -50,20 +50,33 @@ const save = () => {
         Дни недели
     </c-heading>
 
-    <c-select
-        id="days_select"
-        :select="selectDay"
-        :placeholder="currentDay"
-        :selected-items="daysTitles"
-    />
+    <div class="change__days__heading-select">
+        <c-select
+            id="days_select"
+            :select="selectDay"
+            :placeholder="currentDay"
+            :selected-items="daysTitles"
+        />
+    </div>
 
     <c-change-day />
 
-    <c-button type="common" @click="save">
-        Сохранить
-    </c-button>
+    <div class="change__days__buttons">
+        <c-button type="common" @click="save">
+            Сохранить
+        </c-button>
+    </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/mixins/position.in.block";
+
+.change__days__heading-select {
+    @include centralize-selects;
+}
+
+.change__days__buttons {
+    @include centralize-buttons;
+}
 
 </style>

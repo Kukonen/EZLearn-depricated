@@ -52,18 +52,32 @@ const save = () => {
         Занятия
     </c-heading>
 
-    <c-change-lesson
-        v-for="lesson in lessons"
-        :remove-lesson="remove"
-        :lesson="lesson"
-    />
+    <div class="change__lessons__list">
+        <c-change-lesson
+            v-for="lesson in lessons"
+            :remove-lesson="remove"
+            :lesson="lesson"
+        />
+    </div>
 
-    <c-change-add :add="add" />
-    <c-button type="common" @click="save">
-        Сохранить
-    </c-button>
+    <div class="change__lessons__buttons">
+        <c-change-add :add="add" />
+        <c-button type="common" @click="save">
+            Сохранить
+        </c-button>
+    </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+
+@import "src/styles/mixins/position.in.block";
+
+.change__lessons__list {
+    @include centralize-selects;
+}
+
+.change__lessons__buttons {
+    @include centralize-buttons;
+}
 
 </style>

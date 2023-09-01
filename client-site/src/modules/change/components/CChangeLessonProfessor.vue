@@ -18,7 +18,7 @@ const remove = () => {
 </script>
 
 <template>
-    <div>
+    <div class="change__days__lesson__professor">
         <div>
             {{professor.name}}
         </div>
@@ -33,6 +33,10 @@ const remove = () => {
 
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/mixins/block";
 
+.change__days__lesson__professor {
+    @include block-with-button;
+}
 </style>

@@ -1,0 +1,13 @@
+@mixin input-with-button-block {
+    display: flex;
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        border-radius: 0 5px 5px 0;
+
+        white-space: nowrap;
+    }
+}

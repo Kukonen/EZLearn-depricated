@@ -19,7 +19,10 @@ const remove = () => {
 </script>
 
 <template>
-    <div :key="professor.id">
+    <div
+        :key="professor.id"
+        class="change__professors__professor"
+    >
         <input
             type="text"
             placeholder="Имя/ФИО Преподавателя"
@@ -36,6 +39,11 @@ const remove = () => {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/mixins/input";
+
+.change__professors__professor {
+    @include input-with-button-block;
+}
 
 </style>

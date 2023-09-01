@@ -102,13 +102,10 @@ const selectBasicSchedule = () => {
     </c-button>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/mixins/position.in.block";
+
 .settings__basic__selects__container {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 15px;
-    padding: 15px 0;
+    @include centralize-selects;
 }
 </style>

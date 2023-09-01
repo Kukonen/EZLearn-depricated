@@ -20,7 +20,10 @@ const remove = () => {
 </script>
 
 <template>
-    <div :key="lesson.id">
+    <div
+        :key="lesson.id"
+        class="change__lessons__lesson"
+    >
         <input
             type="text"
             placeholder="Название Занятия"
@@ -37,6 +40,11 @@ const remove = () => {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/mixins/input";
+
+.change__lessons__lesson {
+    @include input-with-button-block;
+}
 
 </style>

@@ -1,0 +1,27 @@
+@mixin centralize-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+}
+
+@mixin centralize-selects {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+    padding: 15px 0;
+
+    &:nth-child(n) {
+      width: 70%;
+      margin: auto;
+    }
+
+    @media (max-width: 800px) {
+      &:nth-child(n) {
+        width: 90%;
+      }
+    }
+}

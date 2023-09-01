@@ -54,18 +54,34 @@ const save = () => {
         Преподаватели
     </c-heading>
 
-    <c-change-professor
-        v-for="professor in professors"
-        :professor="professor"
-        :removeProfessor="remove"
-    />
+    <div class="change__professors__list">
+        <c-change-professor
+            v-for="professor in professors"
 
-    <c-change-add :add="add" />
-    <c-button type="common" @click="save">
-        Сохранить
-    </c-button>
+            :professor="professor"
+            :removeProfessor="remove"
+        />
+    </div>
+
+
+    <div class="change__professors__buttons">
+        <c-change-add :add="add" />
+        <c-button type="common" @click="save">
+            Сохранить
+        </c-button>
+    </div>
+
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/mixins/position.in.block";
+
+.change__professors__list {
+    @include centralize-selects;
+}
+
+.change__professors__buttons {
+    @include centralize-buttons;
+}
 
 </style>

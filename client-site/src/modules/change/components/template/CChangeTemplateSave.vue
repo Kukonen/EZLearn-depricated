@@ -20,7 +20,7 @@ const shareWithCommunity = () => {
     <c-heading type="MEDIUM">
         Загрузка Шаблона
     </c-heading>
-    <div>
+    <div class="change__template__save">
         <c-button type="common" @click="saveInCurrent">
             Сделать Шаблон Текущим Рассписанием
         </c-button>
@@ -30,6 +30,12 @@ const shareWithCommunity = () => {
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+
+@import "src/styles/mixins/position.in.block";
+
+.change__template__save {
+    @include centralize-buttons;
+}
 
 </style>
