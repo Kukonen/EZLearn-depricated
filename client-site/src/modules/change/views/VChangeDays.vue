@@ -2,8 +2,8 @@
 
 import CHeading from "../../../components/CHeading.vue";
 import CSelect from "../../../components/CSelect.vue";
-import { onMounted, ref } from "vue";
-import {ScheduleDayFormatter, ScheduleDayTitle} from "../../../types/schedule.types.ts";
+import {onMounted, ref} from "vue";
+import {ScheduleDayTitle} from "../../../types/schedule.types.ts";
 import {translateDayTitle} from "../../../helpers/schedule/schedule.helper.ts";
 import {SelectItem} from "../../../types/elemets.ts";
 import {useStore} from "vuex";
@@ -16,6 +16,10 @@ const daysTitles = ref<SelectItem[]>()
 const currentDay = ref<string>();
 
 onMounted(() => {
+    catchDays();
+})
+
+const catchDays = () => {
     let daysTitlesNotFormatter:ScheduleDayTitle[] = [
         'MONDAY', 'TUESDAY', 'WEDNESDAY',
         'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'
@@ -31,7 +35,7 @@ onMounted(() => {
     currentDay.value = daysTitles.value[0].text;
 
     store.dispatch('scheduleSettings/serializeDays');
-})
+}
 
 const selectDay = (key: string, text: string) => {
     currentDay.value = text;

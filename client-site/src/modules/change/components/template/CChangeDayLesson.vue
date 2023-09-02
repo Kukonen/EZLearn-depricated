@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ScheduleLessonFormatter} from "../../../../types/schedule.types.ts";
-import {computed, onMounted, ref, toRefs, watch} from "vue";
+import {computed, ref, toRefs} from "vue";
 import CHeading from "../../../../components/CHeading.vue";
 import CSelect from "../../../../components/CSelect.vue";
 import {Lesson, Professor} from "../../../../types/common.types.ts";
@@ -108,10 +108,6 @@ const removeAlreadySelectedProfessor = (id: string, name: string) => {
         }
     })
 }
-
-watch(professorAlreadySelected, () => {
-    console.log(professorAlreadySelected.value)
-})
 
 </script>
 

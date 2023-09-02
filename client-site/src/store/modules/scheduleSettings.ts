@@ -5,7 +5,6 @@ import {
     scheduleSettingsCurrentProfessors, Schedule
 } from "../../types/schedule.types.ts";
 import {Lesson, LessonTime, Professor} from "../../types/common.types.ts";
-import {checkScheduleForEmpty} from "../../helpers/scheduleSettings/create.helper.ts";
 import {generateRandomString, parseFromLocalStorage} from "../../helpers/helpFunctions.helper.ts";
 import {
     contactProfessor,
@@ -176,7 +175,7 @@ const scheduleSettings = {
                 const lessons = rootGetters["schedule/getLessons"];
                 const lessonTimes = rootGetters["schedule/getLessonTimes"];
                 const days = rootGetters["schedule/getDays"];
-                    console.log(scheduleInformation, professors, lessons, lessonTimes, days)
+
                 const id = generateRandomString();
 
                 commit('setScheduleInformation', {
