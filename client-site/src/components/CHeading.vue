@@ -1,11 +1,13 @@
 <script setup lang="ts">
 const {type} = defineProps<{
+    h: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
     type: 'LARGE' | 'MEDIUM' | 'SMALL'
 }>();
 </script>
 
 <template>
-    <div
+    <component
+        :is="h ? h : 'h6'"
         class="heading"
         :class="{
             large: type === 'LARGE',
@@ -14,7 +16,7 @@ const {type} = defineProps<{
         }"
     >
         <slot />
-    </div>
+    </component>
 </template>
 
 <style scoped>

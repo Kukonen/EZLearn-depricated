@@ -50,7 +50,10 @@ const save = () => {
 </script>
 
 <template>
-    <c-heading type="LARGE">
+    <c-heading
+        h="h1"
+        type="LARGE"
+    >
         Дни недели
     </c-heading>
 

@@ -17,7 +17,10 @@ const createEmpty = () => {
 </script>
 
 <template>
-    <c-heading type="MEDIUM">
+    <c-heading
+        h="h2"
+        type="MEDIUM"
+    >
         Создание нового шаблона
     </c-heading>
     <div class="change__template__container">

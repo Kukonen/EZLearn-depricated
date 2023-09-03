@@ -67,10 +67,16 @@ const selectBasicSchedule = () => {
 </script>
 
 <template>
-    <c-heading type="LARGE">
+    <c-heading
+        h="h1"
+        type="LARGE"
+    >
         Основные Настройки
     </c-heading>
-    <c-heading type="MEDIUM">
+    <c-heading
+        h="h2"
+        type="MEDIUM"
+    >
         Выбор Готовых Расписаний
     </c-heading>
     <div class="settings__basic__selects__container">

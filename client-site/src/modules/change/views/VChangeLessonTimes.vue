@@ -57,7 +57,10 @@ const save = () => {
 
 <template>
 
-    <c-heading type="LARGE">
+    <c-heading
+        h="h1"
+        type="LARGE"
+    >
         Время Занятий
     </c-heading>
 

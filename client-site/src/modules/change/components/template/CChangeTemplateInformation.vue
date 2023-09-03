@@ -5,7 +5,10 @@ import CParagraph from "../../../../components/CParagraph.vue";
 </script>
 
 <template>
-    <c-heading type="MEDIUM">
+    <c-heading
+        h="h2"
+        type="MEDIUM"
+    >
         Общая информация
     </c-heading>
     <c-paragraph>

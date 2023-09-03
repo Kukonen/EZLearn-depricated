@@ -17,7 +17,10 @@ const shareWithCommunity = () => {
 </script>
 
 <template>
-    <c-heading type="MEDIUM">
+    <c-heading
+        h="h2"
+        type="MEDIUM"
+    >
         Загрузка Шаблона
     </c-heading>
     <div class="change__template__save">

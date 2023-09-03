@@ -50,7 +50,10 @@ const save = () => {
 
 <template>
 
-    <c-heading type="LARGE">
+    <c-heading
+        h="h1"
+        type="LARGE"
+    >
         Преподаватели
     </c-heading>
 

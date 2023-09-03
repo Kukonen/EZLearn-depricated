@@ -10,7 +10,10 @@ import CChangeTemplateSettings from "../components/template/CChangeTemplateSetti
 </script>
 
 <template>
-    <c-heading type="LARGE">
+    <c-heading
+        h="h1"
+        type="LARGE"
+    >
         Настройки шаблона
     </c-heading>
 
