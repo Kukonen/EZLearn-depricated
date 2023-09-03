@@ -2,6 +2,7 @@
 
 import {computed, ref, toRefs} from "vue";
 import {SelectItem} from "../types/elemets.ts";
+import CTransition from "./common/c-transition.vue";
 
 const props = defineProps<{
     id: string,
@@ -59,29 +60,31 @@ const hide = () => open.value = false;
         >
             {{ selected }}
         </div>
-        <div
-            v-if="open"
-            class="select__container"
-        >
-            <input
-                type="text"
-                :value="selectInput"
-                @input="event => selectInput = event.target.value"
-                class="select__input"
-            />
+        <c-transition>
             <div
-                v-for="option of filteredSelectedItems"
-                class="select__item"
-                :key="option.key"
-                @click="
+                v-if="open"
+                class="select__container"
+            >
+                <input
+                    type="text"
+                    :value="selectInput"
+                    @input="event => selectInput = event.target.value"
+                    class="select__input"
+                />
+                <div
+                    v-for="option of filteredSelectedItems"
+                    class="select__item"
+                    :key="option.key"
+                    @click="
                   selected = option.text;
                   hide();
                   selectItem(option.key, option.text);
                 "
-            >
-                {{ option.text }}
+                >
+                    {{ option.text }}
+                </div>
             </div>
-        </div>
+        </c-transition>
     </div>
 </template>
 

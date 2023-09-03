@@ -1,23 +1,16 @@
 <script setup lang="ts">
 
+import CTransition from "./common/c-transition.vue";
 </script>
 
 <template>
     <router-view v-slot="{ Component, route }">
-        <transition name="fade" mode="out-in">
+        <c-transition>
             <component :is="Component" :key="route.path" />
-        </transition>
+        </c-transition>
     </router-view>
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.25s ease-in-out;
-}
 
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
 </style>
