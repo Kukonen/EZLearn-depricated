@@ -1,6 +1,9 @@
 // background
 $light-background-color: #fff;
+$light-secondary-background-color: darken($light-background-color, 20%);
+
 $dark-background-color: #262626;
+$dark-secondary-background-color: lighten($dark-background-color, 20%);
 
 // text
 $light-font-color: #3b3b3b;

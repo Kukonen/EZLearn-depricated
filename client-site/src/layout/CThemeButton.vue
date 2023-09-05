@@ -23,7 +23,9 @@ const switchTheme = () => {
             'button_theme_dark': themeIsDark
         }"
     >
-        Поменять тему
+        <span>
+            Поменять тему
+        </span>
         <transition name="image" mode="out-in">
             <img
                 key="theme-image"
@@ -44,14 +46,17 @@ button {
 
     border-radius: 5px;
 
-    padding: 10px 15px;
+    font-size: 1em;
+
+    padding: 0.65rem 1rem;
+    margin: auto 0;
 }
 
 button :deep(img) {
     vertical-align:middle;
 
-    width: $font-size;
-    height: $font-size;
+    width: 1em;
+    height: 1em;
 }
 
 .button_theme_light {

@@ -22,13 +22,17 @@ const {type} = props;
 @import "src/styles/variables";
 
 button {
-    font-size: $font-size;
+    display: block;
 
-    padding: 10px;
+    font-size: 1em;
+
+    padding: 0.65em;
 
     border-radius: 5px;
 
     cursor: pointer;
+
+    margin: 0 auto;
 
     &:hover {
         transition: all 200ms ease-in-out;
@@ -40,8 +44,8 @@ button {
 button :deep(img) {
     vertical-align:middle;
 
-    width: $font-size;
-    height: $font-size;
+    width: 1rem;
+    height: 1rem;
 }
 
 .button_primary {

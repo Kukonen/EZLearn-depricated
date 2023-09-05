@@ -1,16 +1,54 @@
 <script setup lang="ts">
 import CLink from "../components/CLink.vue";
-import LogoImage from "../assets/logo.svg";
 import CThemeButton from "./CThemeButton.vue";
 
+import LogoImage from "../assets/logo.svg";
+import LogoMenu from "../assets/menu.svg";
+import {useStore} from "vuex";
+
+const store = useStore();
+
+// некрасивый хак для изменения видимости меню
+const changeMenuVisible = () => {
+    if (
+        // некрасиво, извените :(
+        document.documentElement.offsetWidth /
+        getComputedStyle(document.documentElement).fontSize
+        > 42
+    ) {
+        return;
+    }
+
+    const menu = document.getElementById("main__links");
+
+    if(menu.style.display === 'flex') {
+        menu.style.display = 'none';
+    } else if(menu.style.display === 'none' || menu.style.display === '') {
+        menu.style.display = 'flex';
+    }
+}
 </script>
 
 <template>
     <header>
         <div class="header__logo">
             <c-link path="/schedule">
-                <img class="header__logo__image" :src="LogoImage" alt="logo" />
+                <img
+                    class="header__logo__image"
+                    :src="LogoImage"
+                    alt="logo"
+                />
             </c-link>
+        </div>
+        <div
+            @click="changeMenuVisible"
+            class="header__menu"
+        >
+            <img
+                class="header__menu__image"
+                :src="LogoMenu"
+                alt="menu"
+            />
         </div>
         <nav class="header__links">
             <c-link path='/profile'>Профиль</c-link>
