@@ -12,11 +12,16 @@ const props = defineProps<{
 
 <template>
     <div class="schedule__day">
-        <c-link :path="`/schedule/day/${props.id}`" class="schedule__day__title">
+        <c-link
+            :path="`/schedule/day/${props.id}`"
+            class="schedule__day__title"
+        >
             {{title}}
         </c-link>
         <hr>
-        <div class="schedule__day__lessons">
+        <div
+            class="schedule__day__lessons"
+        >
             <c-schedule-lesson v-for="lesson in lessons"
                                :key="lesson.id"
                                :lesson="lesson"
@@ -25,6 +30,27 @@ const props = defineProps<{
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/variables";
+
+.schedule__day {
+
+    border: 1px solid $light-border-color;
+    border-radius: 5px;
+
+    padding: 1rem;
+
+    width: 20rem;
+
+    text-align: center;
+}
+
+.schedule__day__lessons {
+    display: flex;
+
+    gap: 0.7rem;
+
+    flex-direction: column;
+}
 
 </style>

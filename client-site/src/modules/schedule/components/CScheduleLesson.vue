@@ -36,6 +36,58 @@ const props = defineProps<{
     </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "src/styles/variables";
 
+.schedule__day__lesson {
+    display: flex;
+
+    flex-direction: column;
+
+    border-top: 1px solid $light-border-color;
+    border-bottom: 1px solid $light-border-color;
+    border-radius: 5px;
+
+    gap: 0.7rem;
+
+    padding: 0.7rem;
+}
+
+.schedule__day__lesson__name {
+    text-align: justify;
+
+    font-size: 1.1rem;
+}
+
+.schedule__day__lesson__type {
+    font-size: 1rem;
+
+    text-align: start;
+}
+
+.schedule__day__lesson__professors {
+    display: flex;
+
+    justify-content: right;
+
+    gap: 0.7rem;
+
+    flex-wrap: wrap;
+
+    a {
+        border: 1px solid $light-border-color;
+
+        border-radius: 5px;
+
+        padding: 5px 10px;
+    }
+
+    font-size: 0.85rem;
+}
+
+.schedule__day__lesson__time {
+    font-size: 0.85rem;
+
+    text-align: end;
+}
 </style>
