@@ -1,6 +1,6 @@
-import {scheduleInformation} from "../../types/schedule.types.ts";
+import {ScheduleInformation} from "../../types/schedule.types.ts";
 
-export function checkScheduleForEmpty(scheduleInformation: scheduleInformation): boolean {
+export function checkScheduleForEmpty(scheduleInformation: ScheduleInformation): boolean {
     if (scheduleInformation.university && scheduleInformation.university !== '') {
         return false;
     }

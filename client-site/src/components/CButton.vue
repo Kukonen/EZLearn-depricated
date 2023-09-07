@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import {ButtonType} from "../types/elemets.ts";
+import {toRefs} from "vue";
 
 const props = defineProps<{
     type: ButtonType;
 }>();
 
-const {type} = props;
+const {type} = toRefs(props);
+
 </script>
 
 <template>

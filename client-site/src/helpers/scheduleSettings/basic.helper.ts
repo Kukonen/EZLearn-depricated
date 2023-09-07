@@ -1,5 +1,5 @@
 import {request} from "../../utils/request.ts";
-import {BasicScheduleInformation, scheduleInformation} from "../../types/schedule.types.ts";
+import {BasicScheduleInformation, ScheduleInformation} from "../../types/schedule.types.ts";
 
 export async function getUniversity() : Promise<string> {
     const {university} = await request('/v1/schedule/settings/basic/university');
@@ -19,7 +19,7 @@ export async function getTemplate(key: string): Promise<string> {
     return template;
 }
 
-export async function selectSchedule(university: string, group: string, template: string): Promise<scheduleInformation> {
+export async function selectSchedule(university: string, group: string, template: string): Promise<ScheduleInformation> {
     const scheduleBasicInformation: BasicScheduleInformation = {
         university,
         group,
