@@ -3,7 +3,7 @@ import {ScheduleLessonFormatter} from "../../../../types/schedule.types.ts";
 import {computed, ref, toRefs} from "vue";
 import CHeading from "../../../../components/CHeading.vue";
 import CSelect from "../../../../components/CSelect.vue";
-import {Lesson, Professor} from "../../../../types/common.types.ts";
+import {Professor} from "../../../../types/common.types.ts";
 import {useStore} from "vuex";
 import {SelectItem} from "../../../../types/elemets.ts";
 import {
@@ -158,10 +158,6 @@ const removeAlreadySelectedProfessor = (id: string, name: string) => {
                 :removeProfessor="removeAlreadySelectedProfessor"
             />
         </div>
-
-
-
-
 
     </div>
 

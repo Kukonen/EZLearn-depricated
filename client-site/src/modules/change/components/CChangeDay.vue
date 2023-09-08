@@ -1,10 +1,12 @@
 <script setup lang="ts">
 
-import {computed, onBeforeMount, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import CChangeDayLesson from "./template/CChangeDayLesson.vue";
 import store from "../../../store";
 import CButton from "../../../components/CButton.vue";
 import {scheduleMatchLessonTimeBack} from "../../../helpers/schedule/schedule.helper.ts";
+import CChangeDayWeek from "./CChangeDayWeek.vue";
+import {WeekType} from "../../../types/elemets.ts";
 
 const dayLessons = computed(() => store.getters["scheduleSettings/getDayFromFormatterTitle"])
 const orders = computed(() =>
@@ -15,12 +17,27 @@ const orders = computed(() =>
 
 const currentOrder = ref<number>(1);
 
+const week = ref<WeekType>('odd')
+
+const changeWeek = (newWeek: WeekType) => {
+    week.value = newWeek;
+}
+
+const toggleWeek = (weekToggle: WeekType) => {
+    
+}
+
+const deleteLesson = () => {
+
+}
+
 </script>
 
 <template>
     <div
         class="change__days__lessons__buttons"
     >
+
         <c-button
             v-if="dayLessons"
             v-for="order in orders"
@@ -31,6 +48,14 @@ const currentOrder = ref<number>(1);
             {{order}}
         </c-button>
     </div>
+
+    <c-change-day-week
+        :week="week"
+        :changeWeek="changeWeek"
+        :toggleWeek="toggleWeek"
+        :deleteLesson="deleteLesson"
+    />
+
     <c-change-day-lesson
         v-if="dayLessons"
         :key="dayLessons.lessons[currentOrder - 1]"

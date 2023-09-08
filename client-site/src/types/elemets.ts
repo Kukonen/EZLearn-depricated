@@ -4,3 +4,5 @@ export interface SelectItem {
 }
 
 export type ButtonType = 'primary' | 'secondary' | 'common';
+
+export type WeekType = 'odd' | 'even';
