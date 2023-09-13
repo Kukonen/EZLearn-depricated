@@ -1,4 +1,5 @@
 import {Lesson, LessonTime, Professor} from "./common.types.ts";
+import {WeekType} from "./elemets.ts";
 
 export type ScheduleDayTitle =
     'SUNDAY' | 'MONDAY' |
@@ -16,6 +17,7 @@ export interface ScheduleLesson {
     id: string;
     titleId: string; // lesson: id
     type: ScheduleLessonType;
+    week: WeekType[];
     lessonTimeOrder: number; // lessonTime: order
     professorsIds: string[]; // professor: id
 }
@@ -25,6 +27,7 @@ export interface ScheduleLessonFormatter {
     titleId: string;
     title: string;
     type: string;
+    week: WeekType[];
     lessonTime: string;
     professorsIds: string[];
     professors: string[];
@@ -50,11 +53,6 @@ export interface BasicScheduleInformation {
 
 export interface ScheduleInformation extends BasicScheduleInformation {
     id: string;
-}
-
-export interface scheduleSettingsCurrentProfessors {
-    id: string;
-    professors: Professor[];
 }
 
 export interface Schedule {

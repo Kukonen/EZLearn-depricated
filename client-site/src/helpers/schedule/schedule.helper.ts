@@ -133,7 +133,8 @@ export function convertScheduleDayToScheduleDayFormatter(days: ScheduleDay[], pr
                 title: scheduleMatchTitle(lesson.titleId, lessons),
                 professorsIds: lesson.professorsIds,
                 professors: scheduleMatchProfessor(lesson.professorsIds, professors),
-                lessonTime: scheduleMatchLessonTime(lesson.lessonTimeOrder, lessonTimes)
+                lessonTime: scheduleMatchLessonTime(lesson.lessonTimeOrder, lessonTimes),
+                week: lesson.week
             };
 
             return formatterLesson;
@@ -163,7 +164,8 @@ export function convertScheduleDayFormatterToScheduleDay(days: ScheduleDayFormat
                     titleId: titleId ? titleId : '',
                     type: translateDayLessonDayTitleBack(lesson.type),
                     lessonTimeOrder: scheduleMatchLessonTimeBack(lesson.lessonTime),
-                    professorsIds: lesson.professorsIds
+                    professorsIds: lesson.professorsIds,
+                    week: lesson.week
                 }
 
                 return newLesson;
@@ -194,10 +196,49 @@ export function sortAndFillDays(days: ScheduleDay[], lessonsCount: number): Sche
         let filledLessons: ScheduleLesson[] = [];
 
         for (let i = 0; i < lessonsCount; ++i) {
-            const lesson = lessons.find(l => l.lessonTimeOrder === i + 1);
+            const lesson = lessons.find(l =>
+                l.lessonTimeOrder === i + 1 &&
+                l.week.includes("odd") && l.week.includes("even")
+            );
 
             if (lesson) {
                 filledLessons.push(lesson);
+                continue;
+            }
+
+            const lessonOdd = lessons.find(l =>
+                l.lessonTimeOrder === i + 1 &&
+                l.week.includes("odd")
+            );
+
+            const lessonEven = lessons.find(l =>
+                l.lessonTimeOrder === i + 1 &&
+                l.week.includes("even")
+            );
+
+            if (lessonOdd && lessonEven) {
+                filledLessons.push(lessonOdd);
+                filledLessons.push(lessonEven)
+            } else if (lessonOdd) {
+                filledLessons.push(lessonOdd)
+                filledLessons.push({
+                    id: generateRandomString(),
+                    titleId: '', // lesson: id
+                    type: 'LECTURE',
+                    lessonTimeOrder: i + 1, // lessonTime: order
+                    professorsIds: [],
+                    week: ['even']
+                });
+            } else if (lessonEven) {
+                filledLessons.push(lessonEven)
+                filledLessons.push({
+                    id: generateRandomString(),
+                    titleId: '', // lesson: id
+                    type: 'LECTURE',
+                    lessonTimeOrder: i + 1, // lessonTime: order
+                    professorsIds: [],
+                    week: ['odd']
+                });
             } else {
                 filledLessons.push({
                     id: generateRandomString(),
@@ -205,8 +246,20 @@ export function sortAndFillDays(days: ScheduleDay[], lessonsCount: number): Sche
                     type: 'LECTURE',
                     lessonTimeOrder: i + 1, // lessonTime: order
                     professorsIds: [],
-                })
+                    week: ['odd']
+                });
+                filledLessons.push({
+                    id: generateRandomString(),
+                    titleId: '', // lesson: id
+                    type: 'LECTURE',
+                    lessonTimeOrder: i + 1, // lessonTime: order
+                    professorsIds: [],
+                    week: ['even']
+                });
+
             }
+
+
         }
 
         return filledLessons;
@@ -237,6 +290,15 @@ export function fillEmptyDays(lessonsCount: number): ScheduleDay[] {
                 type: 'LECTURE',
                 lessonTimeOrder: j + 1, // lessonTime: order
                 professorsIds: [],
+                week: ['odd']
+            });
+            lessons.push({
+                id: generateRandomString(),
+                titleId: '', // lesson: id
+                type: 'LECTURE',
+                lessonTimeOrder: j + 1, // lessonTime: order
+                professorsIds: [],
+                week: ['even']
             })
         }
 

@@ -2,14 +2,13 @@ import {
     ScheduleInformation,
     ScheduleDay,
     ScheduleDayFormatter,
-    scheduleSettingsCurrentProfessors, Schedule
+    Schedule, ScheduleLesson
 } from "../../types/schedule.types.ts";
 import {Lesson, LessonTime, Professor} from "../../types/common.types.ts";
 import {generateRandomString, parseFromLocalStorage} from "../../helpers/helpFunctions.helper.ts";
 import {
-    contactProfessor,
-    convertProfessorsToSelectItems, convertScheduleDayFormatterToScheduleDay,
-    fillAndConvertDays
+    fillAndConvertDays,
+    translateDayLessonDayTitleBack,
 } from "../../helpers/schedule/schedule.helper.ts";
 
 const scheduleSettings = {
@@ -19,18 +18,14 @@ const scheduleSettings = {
         lessons: Lesson[],
         lessonTimes: LessonTime[],
         days: ScheduleDay[],
-        dayFormatter: ScheduleDayFormatter[],
-        currentDayTitle: string,
-        currentProfessors: scheduleSettingsCurrentProfessors[]
+        currentDayTitle: string
     } => ({
         scheduleInformation: undefined,
         professors: [],
         lessons: [],
         lessonTimes: [],
         days: [],
-        dayFormatter: [],
-        currentDayTitle: 'Понедельник',
-        currentProfessors: []
+        currentDayTitle: 'Понедельник'
     }),
     getters: {
         getScheduleInformation(state: any) {
@@ -48,31 +43,31 @@ const scheduleSettings = {
         getDays(state: any) {
             return state.days;
         },
-        getDayFromFormatterTitle(state: any) : ScheduleDayFormatter {
-            const days = state.dayFormatter;
+        getDaysFormatter(state: any): ScheduleDayFormatter[] {
+            return fillAndConvertDays(state.days, state.professors, state.lessonTimes, state.lessons)
+        },
+        getDayFromFormatterTitle(state: any, getters: any) : ScheduleDayFormatter {
+            const days = getters.getDaysFormatter;
 
             return days.find((day:ScheduleDayFormatter) =>
                 day.title === state.currentDayTitle);
         },
-        getRemainingProfessorsLikeSelectedItems: (state: any) => (lessonId: string) => {
-            const lessonIdx = state.currentProfessors.findIndex(lesson => lesson.id === lessonId);
+        getAlreadySelectedProfessors: (state: any, getters: any) => (lessonId: string) => {
+            let selectedProfessorsNames: string[] = [];
 
-            const remainingProfessors = state.professors.filter((professor: Professor) => {
-                state.currentProfessors[lessonIdx].professors.forEach(currentProfessor => {
-                    if (currentProfessor.id === professor.id) {
-                        return false;
+            getters.getDaysFormatter.forEach( (day: ScheduleDayFormatter) => {
+                day.lessons.forEach(lesson => {
+                    if (lesson.id === lessonId) {
+                        selectedProfessorsNames = lesson.professors;
                     }
                 })
-
-                return true;
             })
 
-            return convertProfessorsToSelectItems(remainingProfessors);
-        },
-        getAlreadySelectedProfessors: (state: any) => (lessonId: string) => {
-            const lessonIdx = state.currentProfessors.findIndex(lesson => lesson.id === lessonId);
-
-            return state.currentProfessors[lessonIdx].professors;
+            return selectedProfessorsNames.map(selectedProfessorsName => {
+                return state.professors.find((professor:Professor) =>
+                    professor.name === selectedProfessorsName
+                )
+            }).filter(selectedProfessorsName => selectedProfessorsName);
         }
     },
     mutations: {
@@ -91,59 +86,96 @@ const scheduleSettings = {
         setDays(state:any, days:ScheduleDay[]) {
             state.days = days;
         },
-        setDayFormatter(state: any, dayFormatter: ScheduleDayFormatter[]) {
-            state.dayFormatter = dayFormatter;
-        },
         setCurrentDayTitle(state: any, dayTitle: string) {
             state.currentDayTitle = dayTitle;
         },
-        setCurrentProfessors(state: any, currentProfessors:scheduleSettingsCurrentProfessors[]) {
-            state.currentProfessors = currentProfessors;
-        },
-        setLessonTitleByLessonId(state: any, {lessonId, lessonTitle}) {
-            const days = state.dayFormatter
-                .map((day:ScheduleDayFormatter) => {
+        setLessonTitleByLessonId(state: any, {lessonId, lessonKey}) {
+            state.days = state.days
+                .map((day:ScheduleDay) => {
                     const lessonIdx = day.lessons.findIndex(lesson => lesson.id === lessonId)
                     if (lessonIdx !== -1) {
-                        day.lessons[lessonIdx].title = lessonTitle;
+                        day.lessons[lessonIdx].titleId = lessonKey;
                     }
                     return day;
                 });
-
-            state.dayFormatter = days;
         },
-        setTypeTitleByLessonId(state: any, {lessonId, typeTitle}) {
-            const days = state.dayFormatter
-                .map((day:ScheduleDayFormatter) => {
+        setLessonTypeByLessonId(state: any, {lessonId, lessonType}) {
+            state.days = state.days
+                .map((day:ScheduleDay) => {
                     const lessonIdx = day.lessons.findIndex(lesson => lesson.id === lessonId)
                     if (lessonIdx !== -1) {
-                        day.lessons[lessonIdx].type = typeTitle;
+                        day.lessons[lessonIdx].type = translateDayLessonDayTitleBack(lessonType);
                     }
                     return day;
                 });
-
-            state.dayFormatter = days;
         },
-        pushCurrentProfessor(state: any, {lessonId, professor}) {
-            const lessonIdx = state.currentProfessors.findIndex(lesson => lesson.id === lessonId);
+        pushProfessor(state: any, {lessonId, professorId}) {
+            state.days = state.days.map( (day: ScheduleDay) => {
+                day.lessons = day.lessons.map(lesson => {
+                    if (lesson.id === lessonId) {
+                        lesson.professorsIds.push(professorId);
+                    }
 
-            let currentProfessorsFormatter = state.currentProfessors;
+                    return lesson;
+                })
 
-            currentProfessorsFormatter[lessonIdx].professors.push(professor);
-
-            state.currentProfessors = currentProfessorsFormatter;
+                return day;
+            })
         },
-        popCurrentProfessor(state: any, {lessonId, professor}) {
-            const lessonIdx = state.currentProfessors.findIndex(lesson => lesson.id === lessonId);
+        popProfessor(state: any, {lessonId, professorId}) {
+            state.days = state.days.map( (day: ScheduleDay) => {
+                day.lessons = day.lessons.map(lesson => {
+                    if (lesson.id === lessonId) {
+                        lesson.professorsIds = lesson.professorsIds.filter(lessonProfessorId =>
+                            lessonProfessorId !== professorId
+                        );
+                    }
 
-            let currentProfessorsFormatter = state.currentProfessors;
+                    return lesson;
+                })
 
-            currentProfessorsFormatter[lessonIdx].professors = currentProfessorsFormatter[lessonIdx].professors
-                .filter(formatterProfessor =>
-                    formatterProfessor.id !== professor.id
-                );
+                return day;
+            })
+        },
+        toggleWeek(state: any, {lessonId}) {
+            state.days = state.days.map( (day: ScheduleDay) => {
+                let index = day.lessons.findIndex(lesson =>
+                    lesson.id === lessonId
+                )
 
-            state.currentProfessors = currentProfessorsFormatter;
+                if (index !== -1) {
+                    let curLesson = day.lessons[index];
+                    day.lessons.filter(les =>
+                        les.lessonTimeOrder !== curLesson.lessonTimeOrder
+                    )
+
+                    day.lessons.push({
+                        ...curLesson,
+                        week: ['odd', 'even']
+                    })
+                }
+                return day;
+            })
+        },
+        deleteLesson(state: any, {lessonId}) {
+            state.days = state.days.map( (day: ScheduleDay) => {
+                day.lessons = day.lessons.map(lesson => {
+                    if (lesson.id === lessonId) {
+                        return {
+                            id: generateRandomString(),
+                            titleId: '',
+                            type: 'LECTURE',
+                            lessonTimeOrder: lesson.lessonTimeOrder,
+                            professorsIds: [],
+                            week: lesson.week
+                        }
+                    }
+
+                    return lesson;
+                })
+
+                return day;
+            })
         }
     },
     actions: {
@@ -271,58 +303,12 @@ const scheduleSettings = {
         updateDays({state}) {
             const scheduleSettings = parseFromLocalStorage('scheduleSettings')
 
-            let dayFormatter:ScheduleDayFormatter[] = state.dayFormatter;
-            const currentProfessors:scheduleSettingsCurrentProfessors[] = state.currentProfessors;
-
-            dayFormatter = dayFormatter.map(day => {
-                day.lessons = day.lessons.map(lesson => {
-                    const lessonIdx = currentProfessors
-                        .findIndex(currentProfessor => currentProfessor.id === lesson.id)
-
-                    lesson.professors = [];
-                    lesson.professorsIds = [];
-
-                    currentProfessors[lessonIdx].professors.forEach(currentProfessor => {
-                        lesson.professors.push(currentProfessor.name);
-                        lesson.professorsIds.push(currentProfessor.id);
-                    })
-
-                    return lesson;
-                })
-
-                return day;
-            })
-
-            const normalizedDay = convertScheduleDayFormatterToScheduleDay(dayFormatter, state.lessons);
-
             if (scheduleSettings) {
-                scheduleSettings.days = normalizedDay;
+                scheduleSettings.days = state.days;
 
                 localStorage.setItem('scheduleSettings',
                     JSON.stringify(scheduleSettings))
             }
-        },
-        //
-        serializeDays({commit, getters}) {
-            const professors = getters.getProfessors;
-            const lessons = getters.getLessons;
-            const lessonTimes = getters.getLessonTimes;
-            const days = getters.getDays;
-
-            const formatterDays = fillAndConvertDays(days, professors, lessonTimes, lessons);
-
-            let currentProfessors: scheduleSettingsCurrentProfessors[] = [];
-
-            formatterDays.forEach(formatterDay => {
-                formatterDay.lessons.forEach(lessonFormatter => {
-                    currentProfessors.push({
-                        id: lessonFormatter.id,
-                        professors: contactProfessor(lessonFormatter.professorsIds, lessonFormatter.professors)
-                    })
-                })
-            })
-            commit('setDayFormatter', formatterDays);
-            commit('setCurrentProfessors', currentProfessors);
         },
         saveInCurrent({state, dispatch}) {
             const scheduleInformation = state.scheduleInformation;

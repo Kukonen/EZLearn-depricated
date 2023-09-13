@@ -32,9 +32,7 @@ const catchDays = () => {
         }
     });
 
-    currentDay.value = daysTitles.value[0].text;
-
-    store.dispatch('scheduleSettings/serializeDays');
+    currentDay.value = daysTitles.value?.[0].text;
 }
 
 const selectDay = (key: string, text: string) => {

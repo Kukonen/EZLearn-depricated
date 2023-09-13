@@ -37,7 +37,7 @@ const selectLesson = (key: string, text: string) => {
     store.commit('scheduleSettings/setLessonTitleByLessonId',
         {
             lessonId: lesson.value.id,
-            lessonTitle: text
+            lessonKey: key
         },
     )
     currentLesson.value = text;
@@ -52,10 +52,10 @@ const typesTitles:SelectItem[] = [
 const currentType = ref<string>(lesson.value.type);
 
 const selectType = (key: string, text: string) => {
-    store.commit('scheduleSettings/setTypeTitleByLessonId',
+    store.commit('scheduleSettings/setLessonTypeByLessonId',
         {
             lessonId: lesson.value.id,
-            typeTitle: text
+            lessonType: text
         },
     )
     currentType.value = text;
@@ -80,12 +80,9 @@ const currentProfessor = ref<Professor>({
 const addProfessor = () => {
     if (!(currentProfessor.value.name === PROFESSOR_DEFAULT_TITLE)) {
 
-        store.commit('scheduleSettings/pushCurrentProfessor', {
+        store.commit('scheduleSettings/pushProfessor', {
             lessonId: lesson.value.id,
-            professor: {
-                id: currentProfessor.value.id,
-                name: currentProfessor.value.name
-            }
+            professorId: currentProfessor.value.id
         })
 
         currentProfessor.value.name = PROFESSOR_DEFAULT_TITLE;
@@ -100,12 +97,9 @@ const selectProfessor = (key: string, text: string) => {
 }
 
 const removeAlreadySelectedProfessor = (id: string, name: string) => {
-    store.commit('scheduleSettings/popCurrentProfessor', {
+    store.commit('scheduleSettings/popProfessor', {
         lessonId: lesson.value.id,
-        professor: {
-            id: id,
-            name: name
-        }
+        professorId: id
     })
 }
 

@@ -12,10 +12,20 @@ const dayLessons = computed(() => store.getters["scheduleSettings/getDayFromForm
 const orders = computed(() =>
     dayLessons.value?.lessons.map(lesson =>
         scheduleMatchLessonTimeBack(lesson.lessonTime)
+    ).filter((order, idx, orders) =>
+        orders.findIndex( orderIndex =>
+            orderIndex === order
+        ) === idx
     )
 )
 
 const currentOrder = ref<number>(1);
+const currentLesson = computed(() =>
+    dayLessons.value?.lessons.findLast(lesson =>
+        scheduleMatchLessonTimeBack(lesson.lessonTime) === currentOrder.value &&
+        lesson.week.includes(week.value)
+    )
+)
 
 const week = ref<WeekType>('odd')
 
@@ -23,12 +33,16 @@ const changeWeek = (newWeek: WeekType) => {
     week.value = newWeek;
 }
 
-const toggleWeek = (weekToggle: WeekType) => {
-    
+const toggleWeek = () => {
+    store.commit('scheduleSettings/toggleWeek', {
+        lessonId: currentLesson.value.id
+    })
 }
 
 const deleteLesson = () => {
-
+    store.commit('scheduleSettings/deleteLesson', {
+        lessonId: currentLesson.value.id
+    })
 }
 
 </script>
@@ -57,9 +71,9 @@ const deleteLesson = () => {
     />
 
     <c-change-day-lesson
-        v-if="dayLessons"
-        :key="dayLessons.lessons[currentOrder - 1]"
-        :lesson="dayLessons.lessons[currentOrder - 1]"
+        v-if="currentLesson"
+        :key="currentLesson"
+        :lesson="currentLesson"
     />
 </template>
 

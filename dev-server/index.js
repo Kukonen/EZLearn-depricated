@@ -145,7 +145,8 @@ const days = [
                 titleId: 'lesson_5',
                 type: 'LECTURE',
                 lessonTimeOrder: 3,
-                professorsIds: ['professor_3']
+                professorsIds: ['professor_3'],
+                week: ["odd", "even"]
             },
         ]
     },
@@ -158,14 +159,16 @@ const days = [
                 titleId: 'lesson_10000',
                 type: 'LECTURE',
                 lessonTimeOrder: 100,
-                professorsIds: []
+                professorsIds: [],
+                week: ["odd", "even"]
             },
             {
                 id: 'lesssd1211333',
                 titleId: 'lesson_1',
                 type: 'LABORATORY_WORK',
                 lessonTimeOrder: 1,
-                professorsIds: ['professor_1', 'professor_2']
+                professorsIds: ['professor_1', 'professor_2'],
+                week: ["odd", "even"]
             },
         ]
     },
@@ -178,42 +181,48 @@ const days = [
                 titleId: 'lesson_1',
                 type: 'LECTURE',
                 lessonTimeOrder: 1,
-                professorsIds: ['professor_1']
+                professorsIds: ['professor_1'],
+                week: ["odd", "even"]
             },
             {
                 id: 'ledsf213s1',
                 titleId: 'lesson_2',
                 type: 'LECTURE',
                 lessonTimeOrder: 2,
-                professorsIds: ['professor_2']
+                professorsIds: ['professor_2'],
+                week: ["odd", "even"]
             },
             {
                 id: 'lsds3',
                 titleId: 'lesson_3',
                 type: 'LECTURE',
                 lessonTimeOrder: 3,
-                professorsIds: ['professor_3']
+                professorsIds: ['professor_3'],
+                week: ["odd", "even"]
             },
             {
                 id: 'lesfdfdgf3',
                 titleId: 'lesson_3',
                 type: 'SEMINAR',
                 lessonTimeOrder: 4,
-                professorsIds: ['professor_4']
+                professorsIds: ['professor_4'],
+                week: ["odd", "even"]
             },
             {
                 id: 'les321sdf',
                 titleId: 'lesson_5',
                 type: 'LABORATORY_WORK',
                 lessonTimeOrder: 5,
-                professorsIds: ['professor_5']
+                professorsIds: ['professor_5'],
+                week: ["odd", "even"]
             },
             {
                 id: 'ldf123',
                 titleId: 'lesson_5',
                 type: 'SEMINAR',
                 lessonTimeOrder: 6,
-                professorsIds: ['professor_6']
+                professorsIds: ['professor_6'],
+                week: ["odd", "even"]
             },
         ]
     },
@@ -226,7 +235,8 @@ const days = [
                 titleId: 'lesson_4',
                 type: 'COURSE_WORK',
                 lessonTimeOrder: 6,
-                professorsIds: ['professor_7']
+                professorsIds: ['professor_7'],
+                week: ["odd", "even"]
             },
         ]
     },
@@ -239,14 +249,16 @@ const days = [
                 titleId: 'lesson_3',
                 type: 'LECTURE',
                 lessonTimeOrder: 4,
-                professorsIds: ['professor_1', 'professor_2']
+                professorsIds: ['professor_1', 'professor_2'],
+                week: ["odd", "even"]
             },
             {
                 id: 'dfe31232',
                 titleId: 'lesson_1',
                 type: 'SEMINAR',
                 lessonTimeOrder: 1,
-                professorsIds: ['professor_2', 'professor_2']
+                professorsIds: ['professor_2', 'professor_2'],
+                week: ["odd", "even"]
             },
         ]
     },
@@ -259,21 +271,24 @@ const days = [
                 titleId: 'lesson_1',
                 type: 'LECTURE',
                 lessonTimeOrder: 2,
-                professorsIds: ['professor_2']
+                professorsIds: ['professor_2'],
+                week: ["odd", "even"]
             },
             {
                 id: '42123',
                 titleId: 'lesson_2',
                 type: 'LABORATORY_WORK',
                 lessonTimeOrder: 3,
-                professorsIds: ['professor_1', 'professor_2', 'professor_3', 'professor_4', 'professor_5', 'professor_6']
+                professorsIds: ['professor_1', 'professor_2', 'professor_3', 'professor_4', 'professor_5', 'professor_6'],
+                week: ["odd", "even"]
             },
             {
                 id: '4134',
                 titleId: 'lesson_3',
                 type: 'SEMINAR',
                 lessonTimeOrder: 4,
-                professorsIds: ['professor_1', 'professor_2']
+                professorsIds: ['professor_1', 'professor_2'],
+                week: ["odd", "even"]
             },
         ]
     },
@@ -286,7 +301,8 @@ const days = [
                 titleId: 'lesson_5',
                 type: 'LECTURE',
                 lessonTimeOrder: 1,
-                professorsIds: ['professor_6', 'professor_5']
+                professorsIds: ['professor_6', 'professor_5'],
+                week: ["odd", "even"]
             },
         ]
     }

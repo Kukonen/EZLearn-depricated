@@ -7,7 +7,7 @@ import {WeekType} from "../../../types/elemets.ts";
 const props = defineProps<{
     week: WeekType,
     changeWeek: (newWeek: WeekType) => void,
-    toggleWeek: (weekToggle: WeekType) => void,
+    toggleWeek: () => void,
     deleteLesson: () => void
 }>();
 
@@ -38,7 +38,7 @@ const {week} = toRefs(props);
 
         <c-button
             type="common"
-            @click="toggleWeek(week)"
+            @click="toggleWeek()"
         >
             Сделать занятие также и в {{ week === "odd" ? 'чётной' : 'нечётной' }}
         </c-button>
