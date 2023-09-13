@@ -363,3 +363,17 @@ export function contactProfessor(professorsIds: string[], professorsNames: strin
         return []
     }
 }
+
+export function clearEmptyDays(days: ScheduleDay[]) {
+    return days.map((day: ScheduleDay) => {
+        return {
+            id: day.id,
+            title: day.title,
+            lessons: day.lessons.filter(lesson =>
+                lesson.titleId || lesson.professorsIds.length > 0
+            )
+        };
+    }).filter((day: ScheduleDay) =>
+        day.lessons.length > 0
+    )
+}

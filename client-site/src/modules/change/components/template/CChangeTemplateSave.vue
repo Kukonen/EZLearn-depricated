@@ -11,7 +11,7 @@ const saveInCurrent = () => {
 }
 
 const shareWithCommunity = () => {
-
+    store.dispatch('scheduleSettings/shareWithCommunity');
 }
 
 </script>

@@ -7,9 +7,11 @@ import {
 import {Lesson, LessonTime, Professor} from "../../types/common.types.ts";
 import {generateRandomString, parseFromLocalStorage} from "../../helpers/helpFunctions.helper.ts";
 import {
+    clearEmptyDays,
     fillAndConvertDays,
     translateDayLessonDayTitleBack,
 } from "../../helpers/schedule/schedule.helper.ts";
+import {request} from "../../utils/request.ts";
 
 const scheduleSettings = {
     state: (): {
@@ -317,17 +319,7 @@ const scheduleSettings = {
             const lessonTimes = state.lessonTimes;
             const days = state.days;
 
-            const daysWithoutEmpty = days.reduce((newDays: ScheduleDay[], day: ScheduleDay) => {
-
-                day.lessons = day.lessons.filter(lesson => {
-                    return lesson.titleId || lesson.professorsIds.length > 0;
-                })
-
-                if (day.lessons.length > 0) {
-                    newDays.push(day);
-                }
-                return newDays;
-            }, [])
+            const daysWithoutEmpty = clearEmptyDays(days)
 
             const schedule:Schedule = {
                 scheduleInformation,
@@ -338,6 +330,31 @@ const scheduleSettings = {
             }
 
             dispatch('schedule/saveSchedule', schedule, { root: true })
+        },
+        async shareWithCommunity({state, dispatch}) {
+            const scheduleInformation = state.scheduleInformation;
+            const professors = state.professors;
+            const lessons = state.lessons;
+            const lessonTimes = state.lessonTimes;
+            const days = clearEmptyDays(state.days);
+
+            request(`/v1/schedule/settings/share`, 'POST', {
+                scheduleInformation,
+                professors,
+                lessons,
+                lessonTimes,
+                days
+            }).then(response =>
+                dispatch('toast/doToast', {
+                    text: 'Рассписание отравилено. В ближайшее время его рассмотрят и опубликуют.',
+                    type: 'INFORMATION'
+                }, { root: true })
+            ).catch(e =>
+                dispatch('toast/doToast', {
+                    text: 'Не получилось отправить рассписание на сервер',
+                    type: 'ERROR'
+                }, { root: true })
+            )
         }
     },
     namespaced: true

@@ -105,7 +105,7 @@ const lessons = [
 const lessonTimes = [
     {
         order: 1,
-        timeStart: '9:00',
+        timeStart: '09:00',
         timeEnd: '10:30'
     },
     {
@@ -370,6 +370,12 @@ app.post('/api/v1/schedule/settings/basic/select', (req, res, next) => {
             group: req.body.group,
             template: req.body.template
         }
+    })
+})
+
+app.post('/api/v1/schedule/settings/share', (req, res, next) => {
+    res.json({
+        status: 'ok'
     })
 })
 
