@@ -48,7 +48,7 @@ button {
 
     font-size: 1em;
 
-    padding: 0.65rem 1rem;
+    padding: 0.5em 1em;
     margin: auto 0;
 }
 

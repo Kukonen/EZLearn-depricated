@@ -1,9 +1,9 @@
 // background
 $light-background-color: #fff;
-$light-secondary-background-color: darken($light-background-color, 20%);
+$light-secondary-background-color: #f8f8f8;
 
 $dark-background-color: #262626;
-$dark-secondary-background-color: lighten($dark-background-color, 20%);
+$dark-secondary-background-color: #2f2f2f;
 
 // text
 $light-font-color: #3b3b3b;
@@ -20,9 +20,9 @@ $light-button-primary-background-color: #3a98e7;
 $light-button-primary-background-color-hover: darken(#208ede, 10%);
 $light-button-primary-border-color: darken(#208ede, 20%);
 
-$light-button-secondary-background-color: #59ec3c;
-$light-button-secondary-background-color-hover: darken(#59ec3c, 10%);
-$light-button-secondary-border-color: darken(#59ec3c, 20%);
+$light-button-secondary-background-color: #92ec81;
+$light-button-secondary-background-color-hover: darken($light-button-secondary-background-color, 10%);
+$light-button-secondary-border-color: darken($light-button-secondary-background-color, 20%);
 
 $light-button-common-background-color: $light-background-color;
 $light-button-common-background-color-hover: darken($light-background-color, 10%);
@@ -33,9 +33,9 @@ $dark-button-primary-background-color: #5e83e5;
 $dark-button-primary-background-color-hover: lighten(#5e83e5, 10%);
 $dark-button-primary-border-color: lighten(#5e83e5, 20%);
 
-$dark-button-secondary-background-color: #3bec28;
-$dark-button-secondary-background-color-hover: lighten(#3bec28, 10%);
-$dark-button-secondary-border-color: lighten(#3bec28, 20%);
+$dark-button-secondary-background-color: #07cc14;
+$dark-button-secondary-background-color-hover: lighten($dark-button-secondary-background-color, 5%);
+$dark-button-secondary-border-color: darken($dark-button-secondary-background-color, 10%);
 
 $dark-button-common-background-color: $dark-background-color;
 $dark-button-common-background-color-hover: lighten($dark-background-color, 10%);

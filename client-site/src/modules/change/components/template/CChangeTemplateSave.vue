@@ -25,7 +25,7 @@ const shareWithCommunity = () => {
     </c-heading>
     <div class="change__template__save">
         <c-button type="common" @click="saveInCurrent">
-            Сделать Шаблон Текущим Рассписанием
+            Установить Себе Рассписание
         </c-button>
         <c-button type="common" @click="shareWithCommunity">
             Поделиться с Сообществом

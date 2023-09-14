@@ -28,7 +28,7 @@ button {
 
     font-size: 1em;
 
-    padding: 0.65em;
+    padding: 0.6em;
 
     border-radius: 5px;
 

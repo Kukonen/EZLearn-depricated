@@ -4,6 +4,10 @@
     justify-content: center;
 
     gap: 15px;
+
+    button {
+        margin: 0;
+    }
 }
 
 @mixin centralize-selects {

@@ -40,7 +40,9 @@ const {week} = toRefs(props);
             type="common"
             @click="toggleWeek()"
         >
+            {{week === "odd" ? '&nbsp;' : ''}}
             Сделать занятие также и в {{ week === "odd" ? 'чётной' : 'нечётной' }}
+            {{week === "odd" ? '&nbsp;' : ''}}
         </c-button>
 
         <c-button

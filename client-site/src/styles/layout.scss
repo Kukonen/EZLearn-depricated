@@ -5,7 +5,9 @@
 header {
     display: flex;
 
-    font-size: 1.3rem;
+    font-size: 1rem;
+
+    background-color: $light-secondary-background-color;
 }
 
 .header__logo {
@@ -120,7 +122,19 @@ main {
 // footer
 
 footer {
+    background-color: $light-secondary-background-color;
+
     flex-shrink: 0;
 
     padding: 15px;
+}
+
+.dark {
+    header {
+        background-color: $dark-secondary-background-color;
+    }
+
+    footer {
+        background-color: $dark-secondary-background-color;
+    }
 }
