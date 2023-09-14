@@ -49,7 +49,7 @@ button :deep(img) {
     width: 1rem;
     height: 1rem;
 
-    stroke: $dark-background-color;
+    stroke: $light-font-color;
 }
 
 button :deep(svg) {
@@ -138,7 +138,7 @@ button {
     }
 
     button :deep(svg) {
-        stroke: $light-background-color;
+        stroke: $dark-font-color;
     }
 }
 </style>

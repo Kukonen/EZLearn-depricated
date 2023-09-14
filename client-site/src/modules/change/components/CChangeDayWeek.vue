@@ -56,6 +56,8 @@ const {week} = toRefs(props);
 
 <style scoped lang="scss">
 
+@import "src/styles/variables";
+
 .change__days__lesson__options {
     display: flex;
 
@@ -74,12 +76,12 @@ const {week} = toRefs(props);
 
 .change__days__lesson__week__odd {
     border-radius: 5px 0 0 5px;
-    border-right: 0;
+    border-right: 0 !important;
 }
 
 .change__days__lesson__week__even {
     border-radius: 0 5px 5px 0;
-    border-left: 0;
+    border-left: 0 !important;
 }
 
 </style>

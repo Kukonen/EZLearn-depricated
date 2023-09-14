@@ -25,8 +25,8 @@ $light-button-secondary-background-color-hover: darken($light-button-secondary-b
 $light-button-secondary-border-color: darken($light-button-secondary-background-color, 20%);
 
 $light-button-common-background-color: $light-background-color;
-$light-button-common-background-color-hover: darken($light-background-color, 10%);
-$light-button-common-border-color: darken($light-background-color, 20%);
+$light-button-common-background-color-hover: darken($light-button-common-background-color, 10%);
+$light-button-common-border-color: darken($light-button-common-background-color, 20%);
 
 
 $dark-button-primary-background-color: #5e83e5;
@@ -38,8 +38,8 @@ $dark-button-secondary-background-color-hover: lighten($dark-button-secondary-ba
 $dark-button-secondary-border-color: darken($dark-button-secondary-background-color, 10%);
 
 $dark-button-common-background-color: $dark-background-color;
-$dark-button-common-background-color-hover: lighten($dark-background-color, 10%);
-$dark-button-common-border-color: lighten($dark-background-color, 20%);
+$dark-button-common-background-color-hover: lighten($dark-button-common-background-color, 10%);
+$dark-button-common-border-color: $dark-border-color;
 
 // schedule
 
