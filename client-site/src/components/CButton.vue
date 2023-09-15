@@ -28,7 +28,7 @@ button {
 
     font-size: 1em;
 
-    padding: 0.65em;
+    padding: 0.6em;
 
     border-radius: 5px;
 
@@ -48,6 +48,17 @@ button :deep(img) {
 
     width: 1rem;
     height: 1rem;
+
+    stroke: $light-font-color;
+}
+
+button :deep(svg) {
+    vertical-align:middle;
+
+    width: 1rem;
+    height: 1rem;
+
+    stroke: $dark-background-color;
 }
 
 .button_primary {
@@ -117,6 +128,17 @@ button {
         &:hover {
             background-color: $dark-button-common-background-color-hover;
         }
+    }
+
+    button :deep(img) {
+        vertical-align:middle;
+
+        width: 1rem;
+        height: 1rem;
+    }
+
+    button :deep(svg) {
+        stroke: $dark-font-color;
     }
 }
 </style>

@@ -52,15 +52,18 @@ const deleteLesson = () => {
         class="change__days__lessons__buttons"
     >
 
-        <c-button
+        <button
             v-if="dayLessons"
             v-for="order in orders"
             :key="order"
             @click="currentOrder = order"
-            :type="order === currentOrder ? 'primary' : 'common'"
+            :class="{
+                'change__days__lessons__button__primary': order === currentOrder,
+                'change__days__lessons__button__common': order !== currentOrder
+            }"
         >
             {{order}}
-        </c-button>
+        </button>
     </div>
 
     <c-change-day-week
@@ -79,6 +82,8 @@ const deleteLesson = () => {
 
 <style scoped lang="scss">
 
+@import "src/styles/variables";
+
 .change__days__lessons__buttons {
     display: flex;
 
@@ -90,6 +95,46 @@ const deleteLesson = () => {
 
     button {
         margin: 0;
+    }
+}
+
+button {
+    padding: 0.5rem;
+
+    font-size: 1rem;
+
+    border: 0;
+
+    background-color: $light-background-color;
+
+    color: $light-font-color;
+
+    cursor: pointer;
+}
+
+.change__days__lessons__button__primary {
+    border: 1px solid $light-button-primary-border-color;
+
+    border-radius: 3px;
+}
+
+.change__days__lessons__button__common {
+    border-bottom: 1px solid $light-button-primary-border-color;
+}
+
+.dark {
+    button {
+        background-color: $dark-background-color;
+
+        color: $dark-font-color;
+    }
+
+    .change__days__lessons__button__primary {
+        border: 1px solid $dark-button-primary-border-color;
+    }
+
+    .change__days__lessons__button__common {
+        border-bottom: 1px solid $dark-button-primary-border-color;
     }
 }
 
