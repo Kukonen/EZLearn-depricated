@@ -11,15 +11,14 @@ const currentRouteName = computed(() => route)
 
 /** хак, чтобы после расширения окна меню закрывалось **/
 
-const menuVisibleStatus = ref<boolean>(false);
-
 const mediaQuery = window.matchMedia("(max-width: 42rem)");
 
-menuVisibleStatus.value = mediaQuery.matches;
-
 const mediaListener = event => {
-    if (menuVisibleStatus.value && !mediaQuery.matches) {
-        document.getElementById("main__links").style.display = 'none';
+    const menu = document.getElementById("main__links");
+
+    if (!mediaQuery.matches) {
+        menu?.classList.remove('main__links__visible');
+        menu.style.display = "none";
     }
 }
 

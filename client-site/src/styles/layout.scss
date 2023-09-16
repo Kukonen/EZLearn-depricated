@@ -8,6 +8,7 @@ header {
     font-size: 1rem;
 
     background-color: $light-secondary-background-color;
+
 }
 
 .header__logo {
@@ -56,12 +57,6 @@ header {
     }
 }
 
-.main__links__hidden {
-    display: none;
-
-
-}
-
 .header__empty__section {
     display: none;
 }
@@ -103,6 +98,10 @@ main {
 #main__links {
     display: none;
 
+    background-color: $light-background-color;
+
+    width: 100%;
+
     font-size: 1em;
 
     flex-direction: column;
@@ -114,10 +113,12 @@ main {
     border-bottom: 1px solid $light-border-color;
 }
 
-@media (min-width: 42rem) {
-    #main__links {
-        display: none !important; // чтобы при отдалении не оставалось меню
-    }
+.main__links__visible {
+    animation: appearsFromNone 0.3s forwards;
+}
+
+.main__links__closing {
+    animation: disappearsFromFlex 0.3s;
 }
 
 #main__content {
@@ -141,5 +142,25 @@ footer {
 
     footer {
         background-color: $dark-secondary-background-color;
+    }
+}
+
+@keyframes appearsFromNone {
+    0% {
+        opacity: 0;
+    }
+
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes disappearsFromFlex {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
     }
 }
