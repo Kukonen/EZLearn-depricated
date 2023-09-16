@@ -56,6 +56,16 @@ header {
     }
 }
 
+.main__links__hidden {
+    display: none;
+
+
+}
+
+.header__empty__section {
+    display: none;
+}
+
 .header__theme {
     display: flex;
 
@@ -64,15 +74,9 @@ header {
     padding: 0 1rem;
 }
 
-@media (max-width: 54rem) {
-    header {
-        font-size: 1rem;
-    }
-}
-
 @media (max-width: 42rem) {
     header {
-        font-size: 1.3rem;
+        font-size: 1rem;
     }
 
     .header__links {
@@ -84,8 +88,9 @@ header {
     .header__links {
         display: none;
     }
-    .header__theme {
-        display: none;
+    .header__empty__section {
+        display: block;
+        flex: auto;
     }
 }
 
@@ -98,7 +103,7 @@ main {
 #main__links {
     display: none;
 
-    font-size: 1.3rem;
+    font-size: 1em;
 
     flex-direction: column;
 
