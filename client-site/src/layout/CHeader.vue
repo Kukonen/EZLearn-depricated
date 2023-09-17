@@ -21,12 +21,21 @@ const changeMenuVisible = () => {
 
     const menu = document.getElementById("main__links");
 
-    if(menu.style.display === 'flex') {
-        menu.style.display = 'none';
-    } else if(menu.style.display === 'none' || menu.style.display === '') {
-        menu.style.display = 'flex';
+    if(menu.classList.contains('main__links__visible')) {
+        menu.classList.remove('main__links__visible');
+        menu.classList.add('main__links__closing');
+        setTimeout(function() {
+            menu.classList.remove("main__links__closing");
+            menu.style.display = "none";
+        }, 300);
+
+    } else {
+        menu.classList.add('main__links__visible');
+        menu.style.display = "flex";
     }
 }
+
+// хак закончен
 </script>
 
 <template>

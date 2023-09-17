@@ -14,6 +14,12 @@ import CLink from "../../../components/CLink.vue";
     </div>
 
 </template>
-<style scoped>
+<style scoped lang="scss">
+
+@media (max-width: 42rem) {
+    .change__navbar {
+        display: none;
+    }
+}
 
 </style>
