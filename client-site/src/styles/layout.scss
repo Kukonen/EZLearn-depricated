@@ -44,16 +44,22 @@ header {
 
     flex:auto;
 
-    gap: 1rem;
+    justify-content: space-between;
 
-    padding: 0 0.7em;
+    div {
+        display: flex;
 
-    height: 3em;
+        gap: 1rem;
 
-    a {
-        font-size: 1em;
+        padding: 0 0.7em;
 
-        margin: auto 0;
+        height: 3em;
+
+        a {
+            font-size: 1em;
+
+            margin: auto 0;
+        }
     }
 }
 
@@ -69,7 +75,11 @@ header {
     padding: 0 1rem;
 }
 
-@media (max-width: 42rem) {
+.header__empty {
+    display: none;
+}
+
+@media (max-width: 46rem) {
     header {
         font-size: 1rem;
     }
@@ -83,7 +93,7 @@ header {
     .header__links {
         display: none;
     }
-    .header__empty__section {
+    .header__empty {
         display: block;
         flex: auto;
     }

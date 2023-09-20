@@ -11,7 +11,7 @@ const currentRouteName = computed(() => route)
 
 /** хак, чтобы после расширения окна меню закрывалось **/
 
-const mediaQuery = window.matchMedia("(max-width: 42rem)");
+const mediaQuery = window.matchMedia("(max-width: 46rem)");
 
 const mediaListener = event => {
     const menu = document.getElementById("main__links");
@@ -82,6 +82,12 @@ onBeforeUnmount(() => {
                 />
             </template>
 
+            <c-link
+                class="content__navbar__link"
+                path='/auth/login'
+            >
+                Войти
+            </c-link>
 
             <c-link
                 class="content__navbar__link"

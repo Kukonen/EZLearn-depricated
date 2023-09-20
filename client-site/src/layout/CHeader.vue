@@ -14,7 +14,7 @@ const changeMenuVisible = () => {
         // некрасиво, извените :(
         document.documentElement.offsetWidth /
         getComputedStyle(document.documentElement).fontSize
-        > 42
+        > 46
     ) {
         return;
     }
@@ -60,10 +60,38 @@ const changeMenuVisible = () => {
             />
         </div>
         <nav class="header__links">
-            <c-link path='/profile'>Профиль</c-link>
-            <c-link path='/schedule'>Рассписание</c-link>
-            <c-link path='/change'>Редактировать рассписание</c-link>
+            <div
+                class="header__links__left"
+            >
+                <c-link
+                    path='/profile'
+                >
+                    Профиль
+                </c-link>
+                <c-link
+                    path='/schedule'
+                >
+                    Рассписание
+                </c-link>
+                <c-link
+                    path='/change'
+                >
+                    Редактировать рассписание
+                </c-link>
+            </div>
+            <div
+                class="header__links__right"
+            >
+                <c-link
+                    path="/auth/login"
+                >
+                    Войти
+                </c-link>
+            </div>
         </nav>
+        <div
+            class="header__empty"
+        />
         <div class="header__theme">
             <c-theme-button />
         </div>

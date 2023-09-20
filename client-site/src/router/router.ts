@@ -3,6 +3,7 @@ import VGreeting from "../modules/greeting/views/VGreeting.vue";
 import userRouter from "./user.router.ts";
 import scheduleRouter from "./schedule.router.ts";
 import changeRouter from "./change.router.ts";
+import authRouter from "./auth.router.ts";
 
 const routes: RouteRecordRaw[]= [
     {
@@ -14,6 +15,7 @@ const routes: RouteRecordRaw[]= [
 routes.push(...userRouter);
 routes.push(...scheduleRouter);
 routes.push(...changeRouter);
+routes.push(...authRouter)
 
 const router: Router = createRouter({
     routes,
