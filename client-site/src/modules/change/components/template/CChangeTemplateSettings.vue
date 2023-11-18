@@ -25,9 +25,11 @@ const template = ref<string>('')
 onMounted(() => {
     const scheduleInformation: ScheduleInformation = store.getters["scheduleSettings/getScheduleInformation"];
 
-    if (scheduleInformation.university) {
-        
-    }
+    // TODO rewrite
+
+    // if (scheduleInformation.university) {
+    //
+    // }
 
     getUniversity().then(university => universities.value = university);
 })

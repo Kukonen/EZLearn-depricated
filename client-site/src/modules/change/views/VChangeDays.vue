@@ -20,6 +20,8 @@ onMounted(() => {
 })
 
 const catchDays = () => {
+    store.dispatch('scheduleSettings/actualizeDays');
+
     let daysTitlesNotFormatter:ScheduleDayTitle[] = [
         'MONDAY', 'TUESDAY', 'WEDNESDAY',
         'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'

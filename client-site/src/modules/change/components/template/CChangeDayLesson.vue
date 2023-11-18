@@ -34,12 +34,14 @@ const lessonTitles:SelectItem[] = [
 const currentLesson = ref<string>(lesson.value.title);
 
 const selectLesson = (key: string, text: string) => {
+
     store.commit('scheduleSettings/setLessonTitleByLessonId',
         {
             lessonId: lesson.value.id,
             lessonKey: key
         },
     )
+    console.log(key, text)
     currentLesson.value = text;
 }
 

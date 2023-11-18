@@ -1,7 +1,8 @@
 import {
     ScheduleDay,
     ScheduleDayFormatter,
-    ScheduleDayTitle, ScheduleLesson,
+    ScheduleDayTitle,
+    ScheduleLesson,
     ScheduleLessonFormatter,
     ScheduleLessonType
 } from "../../types/schedule.types.ts";
@@ -183,153 +184,97 @@ export function sortLessons(lessons: ScheduleLesson[]): ScheduleLesson[] {
     );
 }
 
-// функция заполняет день пустыми занятиями
-export function sortAndFillDays(days: ScheduleDay[], lessonsCount: number): ScheduleDay[] {
-
-    const daysWithSortedLessons: ScheduleDay[] = days.map(day => {
-        day.lessons = sortLessons(day.lessons);
-
-        return day;
-    })
-
-    const fillerLessonFunction = (lessons: ScheduleLesson[], lessonsCount: number): ScheduleLesson[] => {
-        let filledLessons: ScheduleLesson[] = [];
-
-        for (let i = 0; i < lessonsCount; ++i) {
-            const lesson = lessons.find(l =>
-                l.lessonTimeOrder === i + 1 &&
-                l.week.includes("odd") && l.week.includes("even")
-            );
-
-            if (lesson) {
-                filledLessons.push(lesson);
-                continue;
-            }
-
-            const lessonOdd = lessons.find(l =>
-                l.lessonTimeOrder === i + 1 &&
-                l.week.includes("odd")
-            );
-
-            const lessonEven = lessons.find(l =>
-                l.lessonTimeOrder === i + 1 &&
-                l.week.includes("even")
-            );
-
-            if (lessonOdd && lessonEven) {
-                filledLessons.push(lessonOdd);
-                filledLessons.push(lessonEven)
-            } else if (lessonOdd) {
-                filledLessons.push(lessonOdd)
-                filledLessons.push({
-                    id: generateRandomString(),
-                    titleId: '', // lesson: id
-                    type: 'LECTURE',
-                    lessonTimeOrder: i + 1, // lessonTime: order
-                    professorsIds: [],
-                    week: ['even']
-                });
-            } else if (lessonEven) {
-                filledLessons.push(lessonEven)
-                filledLessons.push({
-                    id: generateRandomString(),
-                    titleId: '', // lesson: id
-                    type: 'LECTURE',
-                    lessonTimeOrder: i + 1, // lessonTime: order
-                    professorsIds: [],
-                    week: ['odd']
-                });
-            } else {
-                filledLessons.push({
-                    id: generateRandomString(),
-                    titleId: '', // lesson: id
-                    type: 'LECTURE',
-                    lessonTimeOrder: i + 1, // lessonTime: order
-                    professorsIds: [],
-                    week: ['odd']
-                });
-                filledLessons.push({
-                    id: generateRandomString(),
-                    titleId: '', // lesson: id
-                    type: 'LECTURE',
-                    lessonTimeOrder: i + 1, // lessonTime: order
-                    professorsIds: [],
-                    week: ['even']
-                });
-
-            }
-
-
-        }
-
-        return filledLessons;
-    };
-
-    return daysWithSortedLessons.map(day => {
-        day.lessons = fillerLessonFunction(day.lessons, lessonsCount);
-
-        return day;
-    })
-}
-
-export function fillEmptyDays(lessonsCount: number): ScheduleDay[] {
-    let days: ScheduleDay[] = [];
-
+export function sortAndAddSkippedDays(days: ScheduleDay[]) : ScheduleDay[] {
     let daysTitlesNotFormatter:ScheduleDayTitle[] = [
         'MONDAY', 'TUESDAY', 'WEDNESDAY',
         'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'
     ];
 
-    for(let i = 0; i < daysTitlesNotFormatter.length; ++i) {
-        let lessons: ScheduleLesson[] = [];
+    // пробегаемся по массиву titles, сортируем + добавляем день если нет
+    return daysTitlesNotFormatter.map(dayTitle => {
+        return days.find(day => day.title === dayTitle) ??
+            {
+                id: generateRandomString(),
+                title: dayTitle,
+                lessons: []
+            }
+    })
+}
 
-        for (let j = 0; j < lessonsCount; ++j) {
-            lessons.push({
+export function sortAndAddSkippedLessons(lessons: ScheduleLesson[], lessonCount: number) : ScheduleLesson[] {
+    const newLessons: ScheduleLesson[] = [];
+
+    for(let order = 1; order <= lessonCount; ++order) {
+
+
+        // есть ли одно занятие на обе недели
+        const bothWeekLesson = lessons.find(
+            lesson =>
+                lesson.lessonTimeOrder === order &&
+                lesson.week.includes('odd') &&
+                lesson.week.includes('even')
+        );
+
+        if (bothWeekLesson) {
+            newLessons.push(bothWeekLesson)
+
+            continue;
+        }
+
+        // далее если есть занятие на чётную/нечётную неделю
+        newLessons.push(
+            lessons.find(
+                lesson =>
+                    lesson.lessonTimeOrder === order &&
+                    lesson.week.includes('odd')
+            ) ??
+            {
                 id: generateRandomString(),
                 titleId: '', // lesson: id
                 type: 'LECTURE',
-                lessonTimeOrder: j + 1, // lessonTime: order
+                lessonTimeOrder: order, // lessonTime: order
                 professorsIds: [],
                 week: ['odd']
-            });
-            lessons.push({
+            }
+        )
+
+        newLessons.push(
+            lessons.find(
+                lesson =>
+                    lesson.lessonTimeOrder === order &&
+                    lesson.week.includes('even')
+            ) ??
+            {
                 id: generateRandomString(),
                 titleId: '', // lesson: id
                 type: 'LECTURE',
-                lessonTimeOrder: j + 1, // lessonTime: order
+                lessonTimeOrder: order, // lessonTime: order
                 professorsIds: [],
                 week: ['even']
-            })
-        }
+            }
+        )
+    }
 
-        const day: ScheduleDay = {
-            id: generateRandomString(),
-            title: daysTitlesNotFormatter[i],
-            lessons
-        }
+    return newLessons;
+}
 
-        days.push(day);
+export function fillDays(days: ScheduleDay[], lessonsCount: number) : ScheduleDay[] {
+    days = sortAndAddSkippedDays(days);
+
+    for(let i = 0; i < days.length; ++i) {
+        days[i].lessons = sortAndAddSkippedLessons(days[i].lessons, lessonsCount);
     }
 
     return days;
 }
 
 export function fillAndConvertDays(days: ScheduleDay[], professors: Professor[], lessonTimes: LessonTime[], lessons: Lesson[]): ScheduleDayFormatter[] {
-    if (days.length > 0) {
-        return convertScheduleDayToScheduleDayFormatter(
-            sortAndFillDays(days, lessonTimes.length),
-            professors,
-            lessonTimes,
-            lessons
-        )
-    } else {
-        return convertScheduleDayToScheduleDayFormatter(
-            fillEmptyDays(lessonTimes.length),
-            professors,
-            lessonTimes,
-            lessons
-        )
-    }
+    return convertScheduleDayToScheduleDayFormatter(
+        fillDays(days, lessonTimes.length),
+        professors,
+        lessonTimes,
+        lessons
+    );
 }
 
 export function convertLessonToSelectItems(lessons: Lesson[]) : SelectItem[] {

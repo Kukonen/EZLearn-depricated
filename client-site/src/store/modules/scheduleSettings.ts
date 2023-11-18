@@ -2,13 +2,13 @@ import {
     ScheduleInformation,
     ScheduleDay,
     ScheduleDayFormatter,
-    Schedule, ScheduleLesson
+    Schedule
 } from "../../types/schedule.types.ts";
 import {Lesson, LessonTime, Professor} from "../../types/common.types.ts";
 import {generateRandomString, parseFromLocalStorage} from "../../helpers/helpFunctions.helper.ts";
 import {
     clearEmptyDays,
-    fillAndConvertDays,
+    fillAndConvertDays, fillDays,
     translateDayLessonDayTitleBack,
 } from "../../helpers/schedule/schedule.helper.ts";
 import {request} from "../../utils/request.ts";
@@ -181,6 +181,12 @@ const scheduleSettings = {
         }
     },
     actions: {
+        async actualizeDays({state, commit}) {
+            const days = fillDays(state.days, state.lessonTimes.length);
+
+            commit('setDays', days)
+        },
+
         async collectSchedule({state, commit}) {
             const scheduleSettings = parseFromLocalStorage('scheduleSettings')
 
